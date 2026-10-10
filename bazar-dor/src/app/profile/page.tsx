@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Profile(){return <div className="container py-12 min-h-[60vh] max-w-2xl"><h1 className="text-3xl font-black mb-5">আমার প্রোফাইল</h1><div className="surface p-6"><p className="text-[#7d8980]">প্রোফাইল ও ব্যবহারকারীর তথ্য Better Auth session যুক্ত হলে এখানে দেখানো হবে।</p><Link className="btn btn-primary mt-5" href="/profile/update">তথ্য আপডেট</Link></div></div>}

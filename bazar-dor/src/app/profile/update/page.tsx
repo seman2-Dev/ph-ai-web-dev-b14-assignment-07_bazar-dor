@@ -1,0 +1,3 @@
+ "use client";
+import {useState} from "react";import toast from "react-hot-toast";
+export default function UpdateProfile(){const [name,setName]=useState("");return <div className="container py-12 min-h-[60vh] max-w-xl"><h1 className="text-3xl font-black mb-5">তথ্য আপডেট</h1><form className="surface p-6" onSubmit={e=>{e.preventDefault();toast.error("Better Auth updateUser API যুক্ত করার পর তথ্য সংরক্ষণ হবে।")}}><label className="block font-semibold text-sm">নাম<input className="field mt-2" value={name} onChange={e=>setName(e.target.value)} placeholder="আপনার নাম"/></label><button className="btn btn-primary mt-4">তথ্য আপডেট করুন</button></form></div>}
