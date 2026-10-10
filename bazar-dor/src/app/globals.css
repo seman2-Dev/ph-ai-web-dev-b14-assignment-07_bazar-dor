@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+:root{--page:#eff6f0;--card:#fbfdfb;--green:#12844c;--green-soft:#e4f4e9;--ink:#202a25;--muted:#7c8780;--border:#e5ece6}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);font-family:Arial,"Noto Sans Bengali","Hind Siliguri",sans-serif}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+.container{width:min(1120px,calc(100% - 36px));margin-inline:auto}
+.surface{background:var(--card);border:1px solid var(--border);border-radius:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #b9d8c5;border-radius:10px;padding:10px 16px;background:#fff;color:#176b43;font-weight:700;cursor:pointer}
+.btn-primary{background:var(--green);border-color:var(--green);color:white}
+.field{width:100%;border:1px solid #dfe8e1;background:#fff;border-radius:9px;padding:11px 12px;outline:none}
+.field:focus{border-color:#4a9a70;box-shadow:0 0 0 3px #12844c18}
+.section-title{font-size:23px;font-weight:800;letter-spacing:-.5px}
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.product-card{display:block;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:15px;transition:transform .15s,border-color .15s}
+.product-card:hover{transform:translateY(-2px);border-color:#b7d9c4}
+@media(min-width:1200px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:720px){.container{width:min(100% - 24px,560px)}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-card{padding:12px}.section-title{font-size:20px}.ticker{font-size:12px}}
+@media(max-width:420px){.product-grid{grid-template-columns:1fr}.hero-title{font-size:29px!important}.desktop-auth{display:none}}
