@@ -22,6 +22,7 @@ export default function UpdateProfile(){
     }
 
     if(isPending){return <div className="container py-12 min-h-[60vh] max-w-xl"><div className="surface h-36 animate-pulse"/></div>}
+    if(!sessionUser){return <div className="container py-12 min-h-[60vh] max-w-xl"><h1 className="text-3xl font-black mb-5">তথ্য আপডেট</h1><div className="surface p-6"><p className="text-[#7d8980]">তথ্য আপডেট করতে আগে সাইন ইন করুন।</p><a className="btn btn-primary mt-5" href="/signin">সাইন ইন</a></div></div>}
     return <div className="container py-12 min-h-[60vh] max-w-xl">
         <h1 className="text-3xl font-black mb-5">তথ্য আপডেট</h1>
         <form className="surface p-6" onSubmit={submit}>

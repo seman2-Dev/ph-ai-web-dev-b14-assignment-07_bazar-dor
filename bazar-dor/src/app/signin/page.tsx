@@ -8,6 +8,6 @@ export default function SignIn(){
             <AuthForm mode="signin"/>
         </div>
         <p className="text-sm text-[#7d8980] mt-5 text-center">
-        <Link className="text-[#12844c] font-bold" href="/#">← হোম পেজে ফিরে যান</Link>
+        <Link className="text-[#12844c] font-bold" href="/">← হোম পেজে ফিরে যান</Link>
         </p>
 </div>}

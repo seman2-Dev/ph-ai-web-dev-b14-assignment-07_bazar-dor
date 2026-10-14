@@ -1,12 +1,17 @@
 import Link from "next/link";
-import {notFound} from "next/navigation";
+import {headers} from "next/headers";
+import {notFound, redirect} from "next/navigation";
 import {money,pct} from "@/app/lib/products";
 import {getProductBySlug} from "@/app/lib/api";
+import {auth} from "@/app/lib/auth";
 
 export const instant = false;
 
 export default async function ProductPage({params}:{params:Promise<{slug:string}>}){
-    const {slug}=await params;const p=await getProductBySlug(slug);if(!p)notFound();
+    const {slug}=await params;
+    const session=await auth.api.getSession({headers:await headers()});
+    if(!session)redirect(`/signin?redirected=1&callbackUrl=${encodeURIComponent(`/product/${slug}`)}`);
+    const p=await getProductBySlug(slug);if(!p)notFound();
     const min=Math.min(...p.markets.map(m=>m.min)),max=Math.max(...p.markets.map(m=>m.max)),avg=Math.round(p.markets.reduce((s,m)=>s+m.avg,0)/p.markets.length);
     return <div className="container py-8 min-h-[65vh]">
         <div className="text-sm text-[#7d8980] mb-4">

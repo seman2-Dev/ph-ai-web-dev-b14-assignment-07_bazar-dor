@@ -1,6 +1,6 @@
  "use client";
-import {useState} from "react";
-import {useRouter} from "next/navigation";
+import {useEffect,useState} from "react";
+import {useRouter,useSearchParams} from "next/navigation";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import {Eye, EyeOff} from "lucide-react";
@@ -8,7 +8,9 @@ import { signIn, signUp } from "@/app/lib/auth-client";
 
 async function socialSignIn(provider:"google"|"github"){const {error}=await signIn.social({provider,callbackURL:"/"});if(error)toast.error(error.message||"সাইন ইন করা যায়নি।")}
 
-export default function AuthForm({mode}:{readonly mode:"signin"|"signup"}){const [name,setName]=useState("");const [email,setEmail]=useState("");const [password,setPassword]=useState("");const [showPassword,setShowPassword]=useState(false);const [isSubmitting,setIsSubmitting]=useState(false);const router=useRouter();const signup=mode==="signup";
+export default function AuthForm({mode}:{readonly mode:"signin"|"signup"}){const [name,setName]=useState("");const [email,setEmail]=useState("");const [password,setPassword]=useState("");const [showPassword,setShowPassword]=useState(false);const [isSubmitting,setIsSubmitting]=useState(false);const router=useRouter();const searchParams=useSearchParams();const signup=mode==="signup";
+
+useEffect(()=>{if(!signup&&searchParams.get("redirected")==="1")toast.error("এই পেজটি দেখতে আগে সাইন ইন করুন।")},[searchParams,signup]);
 
 async function submit(e:React.SyntheticEvent<HTMLFormElement>){e.preventDefault();const normalizedEmail=email.trim().toLowerCase();const normalizedName=name.trim();if(!normalizedEmail.includes("@")||password.length<8||(signup&&!normalizedName)){toast.error("সঠিক তথ্য দিন। পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।");return}
     setIsSubmitting(true);

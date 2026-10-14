@@ -15,6 +15,6 @@ export default function ProductCard({product}:{product:Product}){const p=product
             <p className="text-xs text-[#7d8980]">আজকের দাম</p>
             <strong className="text-lg">{money(p.price)} টাকা</strong>
         </div>
-        <span className={`rounded-full px-2 py-1 text-xs font-bold whitespace-nowrap ${p.change>0?"bg-red-50 text-red-600":p.change<0?"bg-green-50 text-green-700":"bg-gray-100 text-gray-500"}`}>{p.change>0?"▲":p.change<0?"▼":"—"} {pct(p.change)}</span>
+        <span className={`rounded-full px-2 py-1 text-xs font-bold whitespace-nowrap ${p.change>0?"bg-green-50 text-green-700":p.change<0?"bg-red-50 text-red-600":"bg-gray-100 text-gray-500"}`}>{p.change>0?"▲":p.change<0?"▼":"—"} {pct(p.change)}</span>
         </div>
     </Link>}

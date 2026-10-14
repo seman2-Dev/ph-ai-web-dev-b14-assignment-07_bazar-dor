@@ -39,7 +39,10 @@ export default function Profile(){
     return <div className="container py-12 min-h-[60vh] max-w-2xl">
         <div className="mb-5 flex items-center justify-between gap-4">
             <h1 className="text-3xl font-black">আমার প্রোফাইল</h1>
-            <button className="btn" type="button" onClick={handleSignOut} disabled={isSigningOut}>{isSigningOut?"সাইন আউট হচ্ছে...":"সাইন আউট"}</button>
+            <div className="flex items-center gap-2">
+                <Link className="btn btn-primary" href="/profile/update">তথ্য আপডেট</Link>
+                <button className="btn" type="button" onClick={handleSignOut} disabled={isSigningOut}>{isSigningOut?"সাইন আউট হচ্ছে...":"সাইন আউট"}</button>
+            </div>
         </div>
         <div className="surface p-6">
             <div className="flex items-center gap-4">
