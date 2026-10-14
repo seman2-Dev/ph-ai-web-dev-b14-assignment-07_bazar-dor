@@ -1,5 +1,5 @@
-import { categories as demoCategories, products as demoProducts } from "@/lib/products";
-import type { Product } from "@/lib/products";
+import { categories as demoCategories, products as demoProducts } from "@/app/lib/products";
+import type { Product } from "@/app/lib/products";
 
 export type Category = { slug: string; name: string; emoji: string; id?: string | number };
 

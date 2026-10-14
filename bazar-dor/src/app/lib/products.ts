@@ -3,11 +3,13 @@ export type Product = {
   unit:string; price:number; change:number; description:string;
   markets:{name:string;district:string;min:number;avg:number;max:number}[];
 };
+
 const marketNames = [
   ["সাহেব বাজার","রাজশাহী"],["কারওয়ান বাজার","ঢাকা"],["রিয়াজউদ্দিন বাজার","চট্টগ্রাম"],
   ["নিউ মার্কেট","খুলনা"],["বন্দর বাজার","সিলেট"],["মাছ বাজার","ময়মনসিংহ"]
 ];
 function markets(price:number){return marketNames.map(([name,district],i)=>{const min=Math.round(price*(.88+i*.012));const max=Math.round(price*(1.05+i*.015));return {name,district,min,avg:Math.round((min+max)/2),max}})}
+
 export const products:Product[]=[
 {id:1,slug:"shornomoshuri-rice",name:"স্বর্ণমাছি চাল",category:"chal",categoryName:"চাল",emoji:"🍚",unit:"প্রতি কেজি",price:148,change:2.1,description:"বাজারে স্বর্ণমাছি চালের আজকের গড় খুচরা মূল্য।",markets:markets(148)},
 {id:2,slug:"miniket-rice",name:"মিনিকেট চাল",category:"chal",categoryName:"চাল",emoji:"🍚",unit:"প্রতি কেজি",price:99,change:-1.9,description:"মিনিকেট চালের বাজারদর ও বিভিন্ন বাজারের তুলনা।",markets:markets(99)},
@@ -28,7 +30,8 @@ export const products:Product[]=[
 {id:17,slug:"eggs",name:"ডিম",category:"egg",categoryName:"ডিম",emoji:"🥚",unit:"প্রতি ডজন",price:158,change:0.9,description:"ডিমের ডজনের বাজারদর।",markets:markets(158)},
 {id:18,slug:"soybean-oil",name:"সয়াবিন তেল",category:"oil",categoryName:"তেল",emoji:"🫙",unit:"প্রতি লিটার",price:185,change:0.6,description:"সয়াবিন তেলের প্রতি লিটারের বাজারদর।",markets:markets(185)}
 ];
+
 export const categories=[{slug:"chal",name:"চাল",emoji:"🍚"},{slug:"dal",name:"ডাল",emoji:"🫘"},{slug:"oil",name:"তেল",emoji:"🫙"},{slug:"vegetable",name:"সবজি",emoji:"🥬"},{slug:"fish",name:"মাছ",emoji:"🐟"},{slug:"meat",name:"মাংস",emoji:"🍗"},{slug:"egg",name:"ডিম",emoji:"🥚"}];
+
 export const money=(n:number)=>new Intl.NumberFormat("bn-BD",{maximumFractionDigits:0}).format(n);
 export const pct=(n:number)=>new Intl.NumberFormat("bn-BD",{maximumFractionDigits:1}).format(Math.abs(n))+"%";
-export const banglaDate=()=>new Intl.DateTimeFormat("bn-BD",{day:"numeric",month:"long",year:"numeric"}).format(new Date());

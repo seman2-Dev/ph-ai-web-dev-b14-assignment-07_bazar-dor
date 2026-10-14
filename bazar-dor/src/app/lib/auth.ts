@@ -1,17 +1,31 @@
-// The package is available at runtime, but its type declarations are not
-// currently resolved by this project's TypeScript configuration.
-// @ts-expect-error -- better-auth does not expose declarations in this setup.
 import { betterAuth } from "better-auth";
-import Database from "better-sqlite3";
+import { MongoClient } from "mongodb";
+import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
-const database = new Database("database.sqlite");
+const client = new MongoClient(process.env.BETTER_AUTH_MONGO_URI);
+const db = client.db('bazar-dor-db');
 
 export const auth = betterAuth({
-  database,
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL,
   secret: process.env.BETTER_AUTH_SECRET,
 
   emailAndPassword: {
     enabled: true,
   },
+
+  socialProviders: {
+    google: {
+      clientId: process.env.BETTER_AUTH_GOOGLE_CLIENT_ID,
+      clientSecret: process.env.BETTER_AUTH_GOOGLE_CLIENT_SECRET
+    },
+    github: {
+      clientId: process.env.BETTER_AUTH_GITHUB_CLIENT_ID,
+      clientSecret: process.env.BETTER_AUTH_GITHUB_CLIENT_SECRET
+    }
+  },
+
+  database: mongodbAdapter(db, {
+    // Optional: if you don't provide a client, database transactions won't be enabled.
+    client
+  }),
 });

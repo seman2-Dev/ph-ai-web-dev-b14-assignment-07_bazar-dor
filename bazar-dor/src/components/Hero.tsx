@@ -1,20 +1,19 @@
-import React from 'react';
 import Image from "next/image";
 import ProductCard from "@/components/ProductCard";
-import {money} from "@/lib/products";
-import {getProducts,getCategories} from "@/lib/api";
+import {getProducts} from "@/app/lib/api";
+import {banglaDate} from "@/app/lib/date";
 import heroImg from "../app/assets/bazar-hero.png";
 
 
 const HeroPage = async () => {
-     const [products,categories]=await Promise.all([getProducts(),getCategories()]);
+   const [products,date]=await Promise.all([getProducts(),banglaDate()]);
  const risers=[...products].filter(p=>p.change>0).sort((a,b)=>b.change-a.change).slice(0,6);
  const fallers=[...products].filter(p=>p.change<0).sort((a,b)=>a.change-b.change).slice(0,6);
 
     return (
         <div className="container py-7">
   <section className="surface p-6 sm:p-9 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
-   <div className="max-w-2xl"><span className="inline-block rounded-full bg-[#e4f4e9] text-[#16804a] px-3 py-1 text-xs font-bold mb-3">সর্বশেষ বাজারদর • {new Intl.DateTimeFormat("bn-BD",{day:"numeric",month:"long",year:"numeric"}).format(new Date())}</span><h1 className="hero-title text-3xl sm:text-4xl font-black leading-tight">আজকের বাজারের দাম এক নজরে</h1><p className="text-[#77847a] mt-4 leading-7">চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম। বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-সর্বোচ্চ এবং দামের পরিবর্তন এক জায়গায়।</p><a href="#সব-পণ্য" className="btn btn-primary mt-6">⚖️ বাজার দেখুন</a></div>
+   <div className="max-w-2xl"><span className="inline-block rounded-full bg-[#e4f4e9] text-[#16804a] px-3 py-1 text-xs font-bold mb-3">সর্বশেষ বাজারদর • {date}</span><h1 className="hero-title text-3xl sm:text-4xl font-black leading-tight">আজকের বাজারের দাম এক নজরে</h1><p className="text-[#77847a] mt-4 leading-7">চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম। বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-সর্বোচ্চ এবং দামের পরিবর্তন এক জায়গায়।</p><a href="#সব-পণ্য" className="btn btn-primary mt-6">⚖️ বাজার দেখুন</a></div>
    <div className="shrink-0 text-[115px] sm:text-[145px] drop-shadow-sm" aria-label="বাজারের ঝুড়ি"><Image src={heroImg} alt="বাজারের ঝুড়ি" width={300} height={300}></Image></div>
   </section>
   <section className="mt-9"><h2 className="section-title mb-4"><span className="text-red-600">▲</span> আজ দাম বেড়েছে</h2><div className="product-grid">{risers.map(p=><ProductCard key={p.id} product={p}/>)}</div></section>

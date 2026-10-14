@@ -1,5 +1,24 @@
 import Link from "next/link";
 import {notFound} from "next/navigation";
 import SortableProducts from "@/components/SortableProducts";
-import {getCategories,getProductsByCategory} from "@/lib/api";
-export default async function CategoryPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const [categories,list]=await Promise.all([getCategories(),getProductsByCategory(slug)]);const cat=categories.find(c=>c.slug===slug);if(!cat && list.length===0)notFound();const category=cat ?? {slug,name: list[0]?.categoryName ?? slug,emoji:list[0]?.emoji ?? "🛒"};return <div className="container py-8 min-h-[60vh]"><section className="surface p-6 flex items-center gap-4"><span className="text-4xl">{category.emoji}</span><div><h1 className="text-3xl font-black">{category.name}</h1><p className="text-sm text-[#849087] mt-1">{list.length}টি পণ্যের আজকের বাজারদর ও পরিবর্তন</p></div></section><SortableProducts items={list}/></div>}
+import {getCategories,getProductsByCategory} from "@/app/lib/api";
+
+export const instant = false;
+
+export default async function CategoryPage({params}:{params:Promise<{slug:string}>}){
+    const {slug}=await params;
+    const [categories,list]=await Promise.all([getCategories(),getProductsByCategory(slug)]);
+    const cat=categories.find(c=>c.slug===slug);if(!cat && list.length===0)notFound();
+    const category=cat ?? {slug,name: list[0]?.categoryName ?? slug,emoji:list[0]?.emoji ?? "🛒"};
+    return <div className="container py-8 min-h-[60vh]">
+        <section className="surface p-6 flex items-center gap-4">
+            <span className="text-4xl">{category.emoji}</span>
+            <div>
+                <h1 className="text-3xl font-black">{category.name}</h1>
+                <p className="text-sm text-[#849087] mt-1">{list.length}টি পণ্যের আজকের বাজারদর ও পরিবর্তন</p>
+            </div>
+        </section>
+        <div className="mt-6">
+            <SortableProducts items={list}/>
+        </div>
+    </div>}
