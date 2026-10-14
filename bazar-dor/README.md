@@ -1,6 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# বাজার দর / BazarDor
+
+BazarDor is a Bengali market-price guide that helps people quickly check the latest prices of everyday essentials. Browse products by category, compare prices across local markets, and keep personal account details secure in one simple interface.
+
+## Technologies Used
+
+- **Next.js 16** with the App Router
+- **React 19** and **TypeScript**
+- **Tailwind CSS 4** for styling
+- **MongoDB** with the Better Auth adapter
+- **Better Auth** for email/password and Google/GitHub authentication
+- **Lucide React** for interface icons
+- **ESLint** for code quality
+
+## Key Features
+
+1. **Market price overview**: View current prices, units, and price changes for common household products.
+2. **Category browsing**: Explore products across rice, lentils, oil, vegetables, fish, meat, and eggs.
+3. **Market comparison**: Compare minimum, average, and maximum prices across markets and districts.
+4. **Product details**: Open dedicated product pages with descriptions, pricing insights, and market data.
+5. **Secure user accounts**: Sign up, sign in, update profiles, and authenticate with email/password or social providers.
 
 ## Getting Started
+
+### Prerequisites
+
+- Node.js 20 or later
+- npm
+- A MongoDB database
+
+### Installation
+
+```bash
+npm install
+```
+
+Create a `.env` file in the project root and provide the authentication and MongoDB values required by the app, including:
+
+```env
+BETTER_AUTH_MONGO_URI=your-mongodb-connection-string
+BETTER_AUTH_SECRET=your-auth-secret
+BETTER_AUTH_URL=http://localhost:3000
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+Add the Google and GitHub provider credentials as needed for social sign-in.
+
+### Run Locally
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Available Scripts
+
+| Command            | Description                              |
+| ------------------ | ---------------------------------------- |
+| `npm run dev`      | Start the development server             |
+| `npm run build`    | Create a production build                |
+| `npm run start`    | Start the production server              |
+| `npm run lint`     | Run ESLint                               |
+| `npm run lint:fix` | Fix automatically repairable lint issues |
 
 First, run the development server:
 
